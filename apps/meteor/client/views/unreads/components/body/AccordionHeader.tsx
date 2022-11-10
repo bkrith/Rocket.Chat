@@ -1,5 +1,7 @@
+import { Button, ButtonGroup, Icon } from '@rocket.chat/fuselage';
+import { useMutableCallback } from '@rocket.chat/fuselage-hooks';
 import { Header } from '@rocket.chat/ui-client';
-import { useTranslation } from '@rocket.chat/ui-contexts';
+import { useTranslation, useLayout, useRoute } from '@rocket.chat/ui-contexts';
 import React, { FC } from 'react';
 
 import MarkdownText from '../../../../components/MarkdownText';
@@ -8,7 +10,13 @@ import { useRoomIcon } from '../../../../hooks/useRoomIcon';
 
 const AccordionHeader: FC<{ room: any }> = ({ room }) => {
 	const t = useTranslation();
+
 	const icon = useRoomIcon(room);
+	const groupRoute = useRoute('/group/:name/:tab?/:context?');
+	const channelRoute = useRoute('/channel/:name/:tab?/:context?');
+	const directRoute = useRoute('/direct/:name/:tab?/:context?');
+
+	let url;
 
 	return (
 		<Header borderBlockStyle='unset'>
@@ -16,12 +24,32 @@ const AccordionHeader: FC<{ room: any }> = ({ room }) => {
 				<RoomAvatar room={room} />
 			</Header.Avatar>
 			<Header.Content>
-				<Header.Content.Row>
+				<Header.Content.Row style={{ flexDirection: 'row' }}>
 					<Header.Icon icon={icon} />
 					<Header.Title is='h1'>{room.name}</Header.Title>
+					<ButtonGroup style={{ marginLeft: 'auto' }}>
+						<Button
+							id={room._id}
+							onClick={(): void => {
+								if (room.t === 'c') {
+									url = `/channel/${room.name}`;
+									channelRoute.push({ name: room.name });
+								} else if (room.t === 'd') {
+									url = `/direct/${room.rid}`;
+									directRoute.push({ name: room.rid });
+								} else {
+									url = `/group/${room.name}`;
+									groupRoute.push({ name: room.name });
+								}
+							}}
+						>
+							<Icon name={'add-reaction'} size='x20' margin='4x' />
+							<span style={{ marginLeft: '10px' }}>{'Go to room'}</span>
+						</Button>
+					</ButtonGroup>
 				</Header.Content.Row>
 				<Header.Content.Row>
-					<Header.Subtitle is='h2'>
+					<Header.Subtitle is='h3'>
 						<MarkdownText
 							parseEmoji={true}
 							variant='inlineWithoutBreaks'

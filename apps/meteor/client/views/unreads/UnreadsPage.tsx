@@ -58,21 +58,21 @@ const UnreadsPage: FC = () => {
 				</ButtonGroup>
 			</Page.Header>
 
-			<Page.Content>
+			<Page.Content padding={0}>
 				<Page.ScrollableContentWithShadow>
-					<Box marginBlock='none' marginInline='auto' width='full'>
+					<Box padding={0} marginBlock='none' marginInline='auto' width='full'>
 						{error && !loading && <ResultMessage />}
 						{!unreads.length && !loading && <ResultMessage empty />}
 						{unreads.length && !loading ? (
-							<Accordion borderBlockStyle='unset'>
+							<Accordion padding={0} borderBlockStyle='unset'>
 								{unreads.map((room) => (
-									<Accordion.Item key={room._id} title={<AccordionHeader room={room} />}>
+									<Accordion.Item margin={10} key={room._id} title={<AccordionHeader room={room} />}>
 										<MessageList rid={room._id} messages={room.messages} />
 									</Accordion.Item>
 								))}
 							</Accordion>
 						) : (
-							<Box is='p' color='hint' fontScale='p2'>
+							<Box padding={0} is='p' color='hint' fontScale='p2'>
 								<Skeleton />
 								<Skeleton />
 								<Skeleton width='75%' />
