@@ -1,7 +1,6 @@
 import { Button, ButtonGroup, Icon } from '@rocket.chat/fuselage';
-import { useMutableCallback } from '@rocket.chat/fuselage-hooks';
 import { Header } from '@rocket.chat/ui-client';
-import { useTranslation, useLayout, useRoute } from '@rocket.chat/ui-contexts';
+import { useTranslation, useRoute } from '@rocket.chat/ui-contexts';
 import React, { FC } from 'react';
 
 import MarkdownText from '../../../../components/MarkdownText';
