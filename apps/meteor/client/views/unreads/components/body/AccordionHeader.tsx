@@ -16,8 +16,6 @@ const AccordionHeader: FC<{ room: any }> = ({ room }) => {
 	const channelRoute = useRoute('/channel/:name/:tab?/:context?');
 	const directRoute = useRoute('/direct/:name/:tab?/:context?');
 
-	let url;
-
 	return (
 		<Header borderBlockStyle='unset'>
 			<Header.Avatar>
@@ -32,13 +30,10 @@ const AccordionHeader: FC<{ room: any }> = ({ room }) => {
 							id={room._id}
 							onClick={(): void => {
 								if (room.t === 'c') {
-									url = `/channel/${room.name}`;
 									channelRoute.push({ name: room.name });
 								} else if (room.t === 'd') {
-									url = `/direct/${room.rid}`;
 									directRoute.push({ name: room.rid });
 								} else {
-									url = `/group/${room.name}`;
 									groupRoute.push({ name: room.name });
 								}
 							}}
