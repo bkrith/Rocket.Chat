@@ -29,11 +29,11 @@ const AccordionHeader: FC<{ room: any }> = ({ room }) => {
 							id={room._id}
 							onClick={(): void => {
 								if (room.t === 'c') {
-									channelRoute.push({ name: room.name });
+									channelRoute.push({ name: room.rid });
 								} else if (room.t === 'd') {
 									directRoute.push({ name: room.rid });
 								} else {
-									groupRoute.push({ name: room.name });
+									groupRoute.push({ name: room.rid });
 								}
 							}}
 						>
