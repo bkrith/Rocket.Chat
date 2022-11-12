@@ -1,10 +1,9 @@
-import { Button, ButtonGroup, Icon } from '@rocket.chat/fuselage';
+import { Button, ButtonGroup, Icon, Avatar } from '@rocket.chat/fuselage';
 import { Header } from '@rocket.chat/ui-client';
 import { useTranslation, useRoute } from '@rocket.chat/ui-contexts';
 import React, { FC } from 'react';
 
 import MarkdownText from '../../../../components/MarkdownText';
-import RoomAvatar from '../../../../components/avatar/RoomAvatar';
 import { useRoomIcon } from '../../../../hooks/useRoomIcon';
 
 const AccordionHeader: FC<{ room: any }> = ({ room }) => {
@@ -18,7 +17,9 @@ const AccordionHeader: FC<{ room: any }> = ({ room }) => {
 	return (
 		<Header borderBlockStyle='unset'>
 			<Header.Avatar>
-				<RoomAvatar room={room} />
+				{room.t === 'c' && <Avatar url={`/avatar/${room.name}`} />}
+				{room.t === 'p' && <Avatar url={`/avatar/room/${room.rid}`} />}
+				{room.t === 'd' && <Avatar url={`/avatar/${room.name}`} />}
 			</Header.Avatar>
 			<Header.Content>
 				<Header.Content.Row style={{ flexDirection: 'row' }}>
